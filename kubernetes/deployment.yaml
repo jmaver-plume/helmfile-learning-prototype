@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helmfile-learning-prototype-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: helmfile-learning-prototype
+  template:
+    metadata:
+      labels:
+        app: helmfile-learning-prototype
+    spec:
+      containers:
+        - name: service-a
+          image: service-a
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+        - name: service-b
+          image: service-b
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3001
