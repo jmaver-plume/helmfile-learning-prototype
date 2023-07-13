@@ -14,7 +14,6 @@ app.all('*', (req, res) => {
     });
 });
 
-const port = process.env.PORT || 3000;
-app.listen(3000, () => {
-    console.log(`Server is running on port ${port}`);
+app.listen(process.env.PORT, () => {
+    console.log(`Main is running on port ${process.env.PORT}`);
 });

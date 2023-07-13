@@ -9,9 +9,13 @@ WORKDIR /usr/src/app
 
 # Copy dependency definitions
 COPY package.json /usr/src/app
+COPY package-lock.json /usr/src/app
+
+# Set to production
+ENV NODE_ENV production
 
 # Install dependencies using npm
-RUN npm install
+RUN npm ci --poduction
 
 # Get all the code needed to run the app
 COPY . /usr/src/app
