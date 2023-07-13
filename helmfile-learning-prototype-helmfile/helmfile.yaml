@@ -1,0 +1,6 @@
+releases:
+  - name: helmfile-learning-prototype
+    namespace: default
+    chart: ../helmfile-learning-prototype-chart
+    values:
+      - values.yaml

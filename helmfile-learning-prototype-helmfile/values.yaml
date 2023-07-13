@@ -1,0 +1,28 @@
+replicaCount: 2
+
+service:
+  type: NodePort
+  port: 3001
+  targetPort: 3001
+
+containers:
+  - name: helmfile-learning-prototype-main
+    image: helmfile-learning-prototype-main
+    imagePullPolicy: IfNotPresent
+    ports:
+      - containerPort: 3000
+        name: main
+    env:
+      - name: PORT
+        value: "3000"
+  - name: helmfile-learning-prototype-proxy
+    image: helmfile-learning-prototype-proxy
+    imagePullPolicy: IfNotPresent
+    ports:
+      - containerPort: 3001
+        name: proxy
+    env:
+      - name: PORT
+        value: "3001"
+      - name: PROXY_HOST
+        value: "localhost:3000"

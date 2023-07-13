@@ -1,0 +1,18 @@
+{{- $type := required "A valid .Values.service.type entry required!" .Values.service.type -}}
+{{- $port := required "A valid .Values.service.port entry required!" .Values.service.port -}}
+{{- $targetPort := required "A valid .Values.service.targetPort entry required!" .Values.service.targetPort -}}
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "helmfile-learning-prototype-chart.fullname" . }}
+  labels:
+    {{- include "helmfile-learning-prototype-chart.labels" . | nindent 4 }}
+spec:
+  type: {{ $type }}
+  ports:
+    - port: {{ $port }}
+      targetPort: {{ $targetPort }}
+      protocol: TCP
+  selector:
+    {{- include "helmfile-learning-prototype-chart.selectorLabels" . | nindent 4 }}

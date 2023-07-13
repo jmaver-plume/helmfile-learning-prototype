@@ -1,0 +1,21 @@
+{{- $replicaCount := required "A valid .Values.replicaCount entry required!" .Values.replicaCount -}}
+{{- $containers := required "A valid .Values.containers entry required!" .Values.containers -}}
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "helmfile-learning-prototype-chart.fullname" . }}
+  labels:
+    {{- include "helmfile-learning-prototype-chart.labels" . | nindent 4 }}
+spec:
+  replicas: {{ $replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "helmfile-learning-prototype-chart.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "helmfile-learning-prototype-chart.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        {{- toYaml $containers | nindent 12 }}
