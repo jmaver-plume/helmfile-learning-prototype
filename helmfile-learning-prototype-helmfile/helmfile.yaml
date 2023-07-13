@@ -3,4 +3,4 @@ releases:
     namespace: default
     chart: ../helmfile-learning-prototype-chart
     values:
-      - values.yaml
+      - values.yaml.gotmpl

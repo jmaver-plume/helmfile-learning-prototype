@@ -1,3 +1,6 @@
+{{ $main_image := requiredEnv "MAIN_IMAGE" }}
+
+
 replicaCount: 2
 
 service:
@@ -7,7 +10,7 @@ service:
 
 containers:
   - name: helmfile-learning-prototype-main
-    image: helmfile-learning-prototype-main
+    image: {{ $main_image }}
     imagePullPolicy: IfNotPresent
     ports:
       - containerPort: 3000
@@ -16,7 +19,7 @@ containers:
       - name: PORT
         value: "3000"
   - name: helmfile-learning-prototype-proxy
-    image: helmfile-learning-prototype-proxy
+    image: {{ readFile "matrix.yaml" | fromYaml | get "proxy-container-image" }}
     imagePullPolicy: IfNotPresent
     ports:
       - containerPort: 3001
