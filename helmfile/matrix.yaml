@@ -1,0 +1,2 @@
+main-container-image: helmfile-learning-prototype-main
+proxy-container-image: helmfile-learning-prototype-proxy
